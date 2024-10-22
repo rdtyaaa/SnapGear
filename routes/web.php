@@ -53,3 +53,7 @@ require __DIR__.'/auth.php';
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
+// Member Routes
+Route::get('/member', [MemberController::class, 'index'])->name('admin.member');
+
+require __DIR__.'/auth.php';
