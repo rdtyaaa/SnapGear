@@ -4,14 +4,15 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UnitController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Dashboard route
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,12 +20,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-
-
 // Unit routes
+Route::post('/units/{unit}/borrow', [UnitController::class, 'borrow'])->name('units.borrow');
 Route::get('/admin/units/create', [AdminController::class, 'createUnit'])->name('admin.units.create');
 Route::post('/admin/units', [AdminController::class, 'storeUnit'])->name('admin.units.store');
 Route::get('/admin/units/{unit}/edit', [AdminController::class, 'editUnit'])->name('admin.units.edit');
@@ -45,6 +44,5 @@ Route::post('/admin/users', [AdminController::class, 'storeUser'])->name('admin.
 Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
 Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
 Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
-
 
 require __DIR__.'/auth.php';

@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.units.store') }}" method="POST">
+        <form action="{{ route('admin.units.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -37,31 +37,46 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="mb-4">
+                <label for="gambar" class="block text-sm font-medium text-gray-700">Image</label>
+                <input type="file" name="gambar" id="gambar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                @error('gambar')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
             <div class="flex justify-end">
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>
 
-    <div class="max-w-xl mx-auto bg-white p-5 rounded-md shadow-sm mt-10">
+    <div class="max-w-full mx-auto bg-white p-5 rounded-md shadow-sm mt-10">
         <h2 class="text-xl font-bold mb-5">Units List</h2>
         <div class="overflow-x-auto">
-            <table class="table w-full">
+            <table class="table-auto w-full">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Action</th>
+                    <tr class="bg-gray-200">
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Category</th>
+                        <th class="px-4 py-2">Image</th>
+                        <th class="px-4 py-2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($units as $unit)
-                        <tr>
-                            <td>{{ $unit->id }}</td>
-                            <td>{{ $unit->name }}</td>
-                            <td>{{ $unit->category->name }}</td>
-                            <td>
+                        <tr class="border-b">
+                            <td class="px-4 py-2">{{ $unit->id }}</td>
+                            <td class="px-4 py-2">{{ $unit->name }}</td>
+                            <td class="px-4 py-2">{{ $unit->category->name }}</td>
+                            <td class="px-4 py-2">
+                                @if ($unit->gambar)
+                                    <img src="{{ asset('images/' . $unit->gambar) }}" alt="{{ $unit->name }}" class="w-16 h-16 object-cover">
+                                @else
+                                    No Image
+                                @endif
+                            </td>
+                            <td class="px-4 py-2">
                                 <a href="{{ route('admin.units.edit', $unit->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('admin.units.destroy', $unit->id) }}" method="POST" class="inline-block">
                                     @csrf
