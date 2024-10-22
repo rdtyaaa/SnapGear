@@ -1,9 +1,10 @@
+<!-- resources/views/categories/create.blade.php -->
 @extends('layouts.app')
 
 @section('content')
 <div class="container mx-auto mt-10">
     <div class="max-w-md mx-auto bg-white p-5 rounded-md shadow-sm">
-        <h1 class="text-2xl font-bold mb-5">Edit Category</h1>
+        <h1 class="text-2xl font-bold mb-5">Create Category</h1>
         
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -15,18 +16,17 @@
             </div>
         @endif
 
-        <form action="{{ route('categories.update', $category->id) }}" method="POST">
+        <form action="{{ route('categories.store') }}" method="POST">
             @csrf
-            @method('PUT')
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" value="{{ $category->name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('name')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>

@@ -73,8 +73,11 @@
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
       <!-- Sidebar content here -->
-      <li><a href="{{ route('admin.units.create') }}">Unit</a></li>    
-      <li><a href="{{ route('admin.categories.create') }}">Category</a></li>    </ul>
+      <li><a href="{{ route('units.index') }}">Unit</a></li>    
+      <li><a href="{{ route('categories.index') }}">Category</a></li>
+      <li><a href="{{ route('admin.users.index') }}">User</a></li>
+
+    </ul>
   </div>
 </div>
 <script src="https://cdn.tailwindcss.com"></script>

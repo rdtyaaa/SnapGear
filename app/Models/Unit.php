@@ -9,10 +9,10 @@ class Unit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id', 'gambar'];
+    protected $fillable = ['name', 'gambar', 'harga', 'stok'];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_unit');
     }
 }

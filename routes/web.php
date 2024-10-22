@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
 
 
@@ -14,9 +15,7 @@ Route::get('/', function () {
 });
 
 // Dashboard route
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -25,28 +24,37 @@ Route::middleware('auth')->group(function () {
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
 // Unit routes
-Route::post('/units/{unit}/borrow', [UnitController::class, 'borrow'])->name('units.borrow');
-Route::get('/admin/units/create', [AdminController::class, 'createUnit'])->name('admin.units.create');
-Route::post('/admin/units', [AdminController::class, 'storeUnit'])->name('admin.units.store');
-Route::get('/admin/units/{unit}/edit', [AdminController::class, 'editUnit'])->name('admin.units.edit');
-Route::put('/admin/units/{unit}', [AdminController::class, 'updateUnit'])->name('admin.units.update');
-Route::delete('/admin/units/{unit}', [AdminController::class, 'destroyUnit'])->name('admin.units.destroy');
+Route::get('/units', [UnitController::class, 'index'])->name('units.index');
+Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
+Route::post('/units', [UnitController::class, 'store'])->name('units.store');
+Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('units.edit');
+Route::put('/units/{unit}', [UnitController::class, 'update'])->name('units.update');
+Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->name('units.destroy');
 
 // Category routes
-Route::resource('categories', CategoryController::class);
-Route::get('/admin/categories/create', [AdminController::class, 'createCategory'])->name('admin.categories.create');
-Route::post('/admin/categories', [AdminController::class, 'storeCategory'])->name('admin.categories.store');
-Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCategory'])->name('admin.categories.edit');
-Route::put('/admin/categories/{category}', [AdminController::class, 'updateCategory'])->name('admin.categories.update');
-Route::delete('/admin/categories/{category}', [AdminController::class, 'destroyCategory'])->name('admin.categories.destroy');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
 
 // User routes
-Route::get('/admin/users/create', [AdminController::class, 'createUser'])->name('admin.users.create');
-Route::post('/admin/users', [AdminController::class, 'storeUser'])->name('admin.users.store');
-Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
-Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
-Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
+require __DIR__.'/auth.php';
+
+// routes/auth.php
+
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 // Member Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/member/borrow-history', [MemberController::class, 'index'])->name('member.borrowHistory');
