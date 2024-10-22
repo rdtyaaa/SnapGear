@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\MemberController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,6 +48,9 @@ Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name(
 Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
 
 // Member Routes
-Route::get('/member', [MemberController::class, 'index'])->name('admin.member');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/member/borrow-history', [MemberController::class, 'index'])->name('member.borrowHistory');
+});
+
 
 require __DIR__.'/auth.php';
