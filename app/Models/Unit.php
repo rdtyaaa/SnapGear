@@ -9,7 +9,7 @@ class Unit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id'];
+    protected $fillable = ['name', 'category_id', 'gambar'];
 
     public function category()
     {

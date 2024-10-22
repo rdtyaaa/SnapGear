@@ -27,8 +27,18 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);        
+            'category_id' => 'required|exists:categories,id',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('gambar')) {
+            $imageName = time().'.'.$request->gambar->extension();  
+            $request->gambar->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        }
+
         Unit::create($request->all());
         return redirect()->route('admin.units.create')->with('success', 'Unit created successfully!');
 
@@ -44,8 +54,18 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);        
+            'category_id' => 'required|exists:categories,id',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);       
+
+        $data = $request->all();
+
+        if ($request->hasFile('gambar')) {
+            $imageName = time().'.'.$request->gambar->extension();  
+            $request->gambar->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        }
+    
         $unit->update($request->all());
         return redirect()->route('admin.units.create')->with('success', 'Unit updated successfully!');
     }
