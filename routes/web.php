@@ -45,4 +45,7 @@ Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->na
 Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
 Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
 
+// Member Routes
+Route::get('/member', [MemberController::class, 'index'])->name('admin.member');
+
 require __DIR__.'/auth.php';
