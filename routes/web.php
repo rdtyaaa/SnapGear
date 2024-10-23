@@ -18,6 +18,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [UnitController::class, 'search'])->name('dashboard');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
