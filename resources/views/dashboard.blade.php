@@ -59,8 +59,7 @@
                                 @endforeach
                             @endif
                         </div>
-                        <h3 class="">Harga: {{ $unit->harga }}</h3>
-                        <h3 class="">Stok: {{ $unit->stok }}</h3>
+                        <h3 class="">Harga: {{ number_format($unit->harga, 0, ',', '.') }}</h3>                        <h3 class="">Stok: {{ $unit->stok }}</h3>
 
                     </div>
                 </div>
@@ -104,9 +103,11 @@
                                             ? unit.categories.map(cat => cat.name).join(', ')
                                             : 'No Category'
                                     }</div>
+                                    
 
                                     
                                 </div>
+                                                                  
                             </div>`;
                         unitsList.insertAdjacentHTML('beforeend', unitCard);
                     });

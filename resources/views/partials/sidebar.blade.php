@@ -6,6 +6,11 @@
         <div class="flex justify-center">
             <img src="{{ asset('images/logo-panjang.png') }}" alt="SnapGear Logo" class="w-1/2 h-20">
         </div>
+        
+        <li>
+            <a href="{{ route('admin.index') }}" class="{{ request()->routeIs('admin.index') ? 'bg-orange-600 text-white' : 'hover:bg-orange-600 hover:text-white' }}">Transaction</a>
+        </li>    
+
       
         <li>
             <a href="{{ route('units.index') }}" class="{{ request()->routeIs('units.index') ? 'bg-orange-600 text-white' : 'hover:bg-orange-600 hover:text-white' }}">Unit</a>

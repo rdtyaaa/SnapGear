@@ -23,7 +23,7 @@
                 @endif
 
                 <div class="flex justify-end mb-4">
-                    <a href="{{ route('units.create') }}" class="btn btn-primary">Create New Unit</a>
+                    <a href="{{ route('units.create') }}" class="btn btn-danger">Create New Unit</a>
                 </div>
 
                 <div class="overflow-x-auto">
