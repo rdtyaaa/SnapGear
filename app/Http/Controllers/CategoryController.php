@@ -20,9 +20,16 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
+        $request->validate([
+            'name' => 'required|unique:categories,name',
+        ], [
+            'name.unique' => 'Nama kategori sudah ada.',
+        ]);
+    
+        // Simpan kategori jika validasi berhasil
         Category::create($request->all());
-        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
+    
+        return redirect()->route('categories.create')->with('success', 'Kategori berhasil dibuat.');
     }
 
     public function edit(Category $category)
