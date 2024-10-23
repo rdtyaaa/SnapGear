@@ -17,7 +17,7 @@
         @csrf
         @method('patch')
 
-        <div>
+        {{-- <div>
             <x-input-label for="picture" :value="__('Profile Picture')" />
             <div class="avatar mt-4 cursor-pointer" onclick="document.getElementById('picture').click();">
                 <div class="h-24 w-24 rounded-full border object-cover shadow-lg">
@@ -32,7 +32,7 @@
             <input id="picture" for="picture" name="picture" type="file" class="mt-1 block hidden w-full" accept="image/*"
                 onchange="previewImage(event)" />
             <x-input-error class="mt-2" :messages="$errors->get('picture')" />
-        </div>
+        </div> --}}
 
         <script>
             function previewImage(event) {

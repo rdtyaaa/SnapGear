@@ -11,23 +11,23 @@ class DropCategoryUnitTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::dropIfExists('category_unit');
-    }
+    // public function up()
+    // {
+    //     Schema::dropIfExists('category_unit');
+    // }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::create('category_unit', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
+    // public function down()
+    // {
+    //     Schema::create('category_unit', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+    //         $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    //         $table->timestamps();
+    //     });
+    // }
 }

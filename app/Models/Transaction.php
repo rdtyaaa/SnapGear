@@ -2,32 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\TransactionUnit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'transactions';
+    protected $fillable = ['transaction_code', 'user_id'];
 
-    protected $fillable = [
-        'id_unit',
-        'id_user',
-        'borrow_date',
-        'denda',
-    ];
-
-    // Relasi dengan model Unit
-    public function unit()
+    public function units()
     {
-        return $this->belongsTo(Unit::class, 'id_unit');
+        return $this->hasMany(TransactionUnit::class, 'transaction_code', 'transaction_code');
     }
 
-    // Relasi dengan model User
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'transaction_category', 'transaction_id', 'category_id');
     }
 }
 
