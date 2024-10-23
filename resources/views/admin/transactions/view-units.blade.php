@@ -46,15 +46,17 @@
                     <label class="label">
                         <span class="label-text">Date Borrowed</span>
                     </label>
-                    <input type="date" value="{{ $transactionUnit->date_borrowed }}" class="input input-bordered w-full"
-                        readonly>
+                    <input type="text"
+                        value="{{ \Carbon\Carbon::parse($transactionUnit->date_borrowed)->locale('id_ID')->translatedFormat('l, d F Y') ?? 'Not Returned Yet' }}"
+                        class="input input-bordered w-full" readonly>
                 </div>
 
                 <div class="form-control mt-4">
                     <label class="label">
                         <span class="label-text">Return Agreement</span>
                     </label>
-                    <input type="date" value="{{ $transactionUnit->return_agreement ?? 'Not Returned Yet' }}"
+                    <input type="text"
+                        value="{{ \Carbon\Carbon::parse($transactionUnit->return_agreement)->locale('id_ID')->translatedFormat('l, d F Y') ?? 'Not Returned Yet' }}"
                         class="input input-bordered w-full" readonly>
                 </div>
 
@@ -67,7 +69,7 @@
                 </div>
 
                 <div class="form-control mt-6">
-                    <a href="{{ route('transactions.index') }}" class="no-print btn btn-secondary">Back to Transactions</a>
+                    <a href="{{ url()->previous() }}" class="no-print btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>
