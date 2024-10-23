@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropCategoryUnitTable extends Migration
+class MakeCategoryUnitTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,12 @@ class DropCategoryUnitTable extends Migration
     {
         // Comment out the drop statement to prevent the table from being dropped
         // Schema::dropIfExists('category_unit');
+        Schema::create('category_unit', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,11 +30,6 @@ class DropCategoryUnitTable extends Migration
      */
     public function down()
     {
-        Schema::create('category_unit', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
+        Schema::dropIfExists('category_unit');
     }
 }

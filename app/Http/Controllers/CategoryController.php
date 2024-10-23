@@ -26,6 +26,7 @@ class CategoryController extends Controller
             'name.unique' => 'Nama kategori telah diambil.',
         ]);
 
+        // Simpan kategori jika validasi berhasil
         Category::create($request->all());
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');

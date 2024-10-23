@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             UnitSeeder::class,
+            UsersTableSeeder::class,
+            CategoriesTableSeeder::class,
+            UnitsTableSeeder::class,
         ]);
     }
 }
