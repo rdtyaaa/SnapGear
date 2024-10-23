@@ -13,7 +13,8 @@ class DropCategoryUnitTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('category_unit');
+        // Comment out the drop statement to prevent the table from being dropped
+        // Schema::dropIfExists('category_unit');
     }
 
     /**
