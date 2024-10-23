@@ -13,6 +13,26 @@ class UnitController extends Controller
         $units = Unit::with('categories')->get();
         return view('units.index', compact('units'));
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        $units = Unit::with('categories')
+            ->when($query, function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        // Jika request dari Fetch API, kembalikan JSON
+        if ($request->ajax()) {
+            return response()->json([
+                'units' => $units
+            ]);
+        }
+
+        // Jika bukan AJAX, kembalikan view biasa
+        return view('dashboard', compact('units'));
+    }
+    
 
     public function create()
     {

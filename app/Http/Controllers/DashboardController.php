@@ -1,15 +1,22 @@
 <?php
+// app/Http/Controllers/DashboardController.php
 
 namespace App\Http\Controllers;
 
-use App\Models\Unit;
 use Illuminate\Http\Request;
+use App\Models\Unit;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::all();
+        $search = $request->query('search');
+        $units = Unit::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('dashboard', compact('units'));
     }
 }
