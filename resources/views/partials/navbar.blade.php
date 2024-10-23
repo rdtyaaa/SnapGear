@@ -1,5 +1,5 @@
 <!-- resources/views/partials/navbar.blade.php -->
-<nav class="bg-orange-600 ">
+<nav class="no-print bg-orange-600 ">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div>

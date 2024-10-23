@@ -1,12 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,6 +60,23 @@ require __DIR__.'/auth.php';
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 // Member Routes
-Route::get('/member', [MemberController::class, 'index'])->name('admin.member');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/member/borrow-history', [MemberController::class, 'index'])->name('member.borrowHistory');
+// });
+
+Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+Route::post('/transactions/store', [TransactionController::class, 'store'])->name('transactions.store');
+Route::get('transactions/{transaction_code}/return/{unit_id}', [TransactionController::class, 'returnForm'])->name('transactions.return');
+Route::post('transactions/{transaction_code}/return/{unit_id}', [TransactionController::class, 'processReturn'])->name('transactions.processReturn');
+Route::get('transactions/{transaction_code}/view/{unit_id}', [TransactionController::class, 'view'])->name('transactions.view');
+Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+Route::get('/transactions/{transaction_code}', [TransactionController::class, 'show'])->name('transactions.detail');
+Route::post('/transactions/{transaction_code}/update-status', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
+
+
+
+
+
 
 require __DIR__.'/auth.php';
