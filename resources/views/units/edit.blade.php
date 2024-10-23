@@ -30,7 +30,7 @@
                 <label class="block text-sm font-medium text-gray-700">Category</label>
                 <div id="category-buttons" class="flex flex-wrap">
                     @foreach ($categories as $category)
-                        <button type="button" class="category-button mt-1 mr-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ $unit->categories->contains($category->id) ? 'bg-indigo-500 text-white' : '' }}" data-id="{{ $category->id }}">{{ $category->name }}</button>
+                        <button type="button" class="category-button mt-1 mr-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ in_array($category->id, $unit->categories->pluck('id')->toArray()) ? 'bg-indigo-500 text-white' : '' }}" data-id="{{ $category->id }}">{{ $category->name }}</button>
                     @endforeach
                 </div>
                 @error('category_id')
@@ -70,31 +70,65 @@
     </div>
 </div>
 
+<!-- Alert Modal -->
+<div id="alert-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div class="relative top-1/4 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Warning</h3>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500">You can only select up to 2 categories.</p>
+            </div>
+            <div class="items-center px-4 py-3">
+                <button id="close-alert" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const categoryButtons = document.querySelectorAll('.category-button');
         const selectedCategories = document.getElementById('selected-categories');
+        const alertModal = document.getElementById('alert-modal');
+        const closeAlertButton = document.getElementById('close-alert');
+        let selectedCount = selectedCategories.querySelectorAll('input').length;
 
         categoryButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const categoryId = this.getAttribute('data-id');
-                this.classList.toggle('bg-indigo-500');
-                this.classList.toggle('text-white');
-
                 if (this.classList.contains('bg-indigo-500')) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'category_id[]';
-                    input.value = categoryId;
-                    input.id = `category-${categoryId}`;
-                    selectedCategories.appendChild(input);
-                } else {
+                    this.classList.remove('bg-indigo-500', 'text-white');
                     const input = document.getElementById(`category-${categoryId}`);
                     if (input) {
                         selectedCategories.removeChild(input);
+                        selectedCount--;
+                    }
+                } else {
+                    if (selectedCount < 2) {
+                        this.classList.add('bg-indigo-500', 'text-white');
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'category_id[]';
+                        input.value = categoryId;
+                        input.id = `category-${categoryId}`;
+                        selectedCategories.appendChild(input);
+                        selectedCount++;
+                    } else {
+                        alertModal.classList.remove('hidden');
                     }
                 }
             });
+        });
+
+        closeAlertButton.addEventListener('click', function () {
+            alertModal.classList.add('hidden');
         });
     });
 </script>
