@@ -51,7 +51,7 @@
                                 value="Rp. {{ number_format($transactionUnit->fine, 0, ',', '.') }}"
                                 class="input input-bordered text-start text-red-500" readonly>
                         </div>
-                    @endifs
+                    @endif
 
                     <div class="form-control mt-4">
                         <label class="label">

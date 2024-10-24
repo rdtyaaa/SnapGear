@@ -57,10 +57,12 @@ class TransactionController extends Controller
             })
             ->count();
 
-        if ($borrowedUnitsCount >= 2) {
+        $selectedUnitsCount = count($request->unit_id);
+
+        if ($borrowedUnitsCount + $selectedUnitsCount > 2) {
             return redirect()
                 ->back()
-                ->withErrors(['error' => 'No more than 2 units may be borrowed.']);
+                ->withErrors(['error' => 'You cannot borrow more than 2 units in total.']);
         }
 
         $transaction = Transaction::updateOrCreate([
