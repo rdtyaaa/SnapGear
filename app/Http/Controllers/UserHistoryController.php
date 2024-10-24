@@ -6,7 +6,6 @@ use App\Models\TransactionUnit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class UserHistoryController extends Controller
 {
     public function index()
     {
