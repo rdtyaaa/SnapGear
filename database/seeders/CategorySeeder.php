@@ -7,8 +7,25 @@ use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        Category::factory()->count(10)->create();
+        $categories = [
+            ['name' => 'Kamera'],
+            ['name' => 'Lighting'],
+            ['name' => 'Canon'],
+            ['name' => 'Sony'],
+            ['name' => 'Fuji Film'],
+            ['name' => 'Microphone'],
+            ['name' => 'Videography'],
+            ['name' => 'Fotography'],
+        ];
+
+        // Menyisipkan data ke dalam tabel categories
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
     }
 }

@@ -7,12 +7,50 @@ use App\Models\Unit;
 use App\Models\Category;
 
 class UnitSeeder extends Seeder
+
+
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        Unit::factory()->count(10)->create()->each(function ($unit) {
-            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $unit->categories()->attach($categories);
-        });
+        $units = [
+            [
+                'name' => 'Camera',
+                'gambar' => '1729595313.jpg',
+                'harga' => 5000000,
+                'stok' => 10,
+            ],
+            [
+                'name' => 'Tripod',
+                'gambar' => '1729595313.jpg',
+                'harga' => 1500000,
+                'stok' => 20,
+            ],
+            [
+                'name' => 'Lens',
+                'gambar' => '1729595313.jpg',
+                'harga' => 2500000,
+                'stok' => 15,
+            ],
+            [
+                'name' => 'Lighting Kit',
+                'gambar' => '1729595313.jpg',
+                'harga' => 3000000,
+                'stok' => 5,
+            ],
+            [
+                'name' => 'Drone',
+                'gambar' => '1729595313.jpg',
+                'harga' => 10000000,
+                'stok' => 3,
+            ],
+        ];
+
+        // Menyisipkan data ke dalam tabel units
+        foreach ($units as $unit) {
+            Unit::create($unit);
+        }
     }
 }

@@ -12,12 +12,19 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public function getRoleAttribute()
+    {
+        return $this->attributes['role'];
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'picture',
+        'role',
         'name',
         'email',
         'password',

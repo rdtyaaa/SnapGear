@@ -13,6 +13,7 @@ class UnitController extends Controller
         $units = Unit::with('categories')->get();
         return view('units.index', compact('units'));
     }
+
     public function search(Request $request)
     {
         $query = $request->input('search');
@@ -32,7 +33,6 @@ class UnitController extends Controller
         // Jika bukan AJAX, kembalikan view biasa
         return view('dashboard', compact('units'));
     }
-    
 
     public function create()
     {
@@ -43,12 +43,14 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:units,name',
             'category_id' => 'required|array',
             'category_id.*' => 'exists:categories,id',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'harga' => 'required|numeric',
             'stok' => 'required|integer'
+        ], [
+            'name.unique' => 'Nama unit sudah ada.',
         ]);
 
         $data = $request->except('category_id');
@@ -74,12 +76,14 @@ class UnitController extends Controller
     public function update(Request $request, Unit $unit)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:units,name,' . $unit->id,
             'category_id' => 'required|array',
             'category_id.*' => 'exists:categories,id',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'harga' => 'required|numeric',
             'stok' => 'required|integer'
+        ], [
+            'name.unique' => 'Nama unit sudah ada.',
         ]);
 
         $data = $request->except('category_id');
