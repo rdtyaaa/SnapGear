@@ -61,7 +61,6 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::post('/transactions/store', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('transactions/{transaction_code}/return/{unit_id}', [TransactionController::class, 'returnForm'])->name('transactions.return');
     Route::post('transactions/{transaction_code}/return/{unit_id}', [TransactionController::class, 'processReturn'])->name('transactions.processReturn');
-    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/transactions/{transaction_code}', [TransactionController::class, 'show'])->name('transactions.detail');
     Route::post('/transactions/{transaction_code}/update-status', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
 });
