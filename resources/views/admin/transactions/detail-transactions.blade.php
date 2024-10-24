@@ -43,7 +43,7 @@
                                 <li>
                                     <p class="text-base">{{ $item['name'] }}</p>
                                     <p class="text-sm">Rp. {{ number_format($item['price_per_day'], 0, ',', '.') }} x
-                                        {{ $item['days_rented'] }} Days</p>
+                                        {{ abs($item['days_rented']) }} Days</p>
                                     <p class="flex justify-end text-sm">Rp.
                                         {{ number_format($item['item_price'], 0, ',', '.') }}</p>
                                 </li>

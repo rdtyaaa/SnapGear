@@ -42,13 +42,16 @@
                             class="input input-bordered w-full" readonly>
                     </div>
 
-                    <div class="form-control mt-4">
-                        <label class="label">
-                            <span class="label-text ">Fine</span>
-                        </label>
-                        <input type="text" name="fine" value="{{ $transactionUnit->fine }}"
-                            class="input input-bordered w-full text-red-500" readonly>
-                    </div>
+                    @if (round($remainingDays) < 0 || round($remainingDays) > 5)
+                        <div class="form-control mt-4">
+                            <label class="label">
+                                <span class="label-text">Fine</span>
+                            </label>
+                            <input type="text" name="fine"
+                                value="Rp. {{ number_format($transactionUnit->fine, 0, ',', '.') }}"
+                                class="input input-bordered text-start text-red-500" readonly>
+                        </div>
+                    @endifs
 
                     <div class="form-control mt-4">
                         <label class="label">
