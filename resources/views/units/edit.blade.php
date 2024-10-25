@@ -1,11 +1,11 @@
 <!-- resources/views/units/edit.blade.php -->
-@extends('layouts.app')
+@extends('layouts.no-navbar')
 
 @section('content')
 <div class="container mx-auto mt-10">
     <div class="max-w-md mx-auto bg-white p-5 rounded-md shadow-sm">
         <h1 class="text-2xl font-bold mb-5">Edit Unit</h1>
-        
+
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Success!</strong>
@@ -23,7 +23,7 @@
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" id="name" value="{{ $unit->name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('name')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
@@ -34,7 +34,7 @@
                     @endforeach
                 </div>
                 @error('category_id')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div id="selected-categories">
@@ -46,25 +46,25 @@
                 <label for="gambar" class="block text-sm font-medium text-gray-700">Image</label>
                 <input type="file" name="gambar" id="gambar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 @error('gambar')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="harga" class="block text-sm font-medium text-gray-700">Price</label>
                 <input type="number" name="harga" id="harga" value="{{ $unit->harga }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('harga')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="stok" class="block text-sm font-medium text-gray-700">Stock</label>
                 <input type="number" name="stok" id="stok" value="{{ $unit->stok }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('stok')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="flex justify-end">
-                <button type="submit" class="btn btn-primary">Update</button>
+            <div class="flex">
+                <button type="submit" class="btn btn-primary w-full">Update</button>
             </div>
         </form>
     </div>
@@ -75,7 +75,7 @@
     <div class="relative top-1/4 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3 text-center">
             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="h-6 w-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
@@ -84,7 +84,7 @@
                 <p class="text-sm text-gray-500">You can only select up to 2 categories.</p>
             </div>
             <div class="items-center px-4 py-3">
-                <button id="close-alert" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                <button id="close-alert" class="px-4 py-2 bg-error text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-error focus:outline-none focus:ring-2 focus:ring-red-300">
                     Close
                 </button>
             </div>

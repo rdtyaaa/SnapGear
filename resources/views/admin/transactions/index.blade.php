@@ -4,11 +4,10 @@
 @section('content')
     <div class="flex">
         @include('partials.sidebar')
-
-        <div class="ml-80 flex-1 p-6">
+        <div class="ml-80 flex-1 rounded p-6">
             <div class="container mx-auto mt-10">
-                <div class="mx-auto max-w-7xl rounded-md bg-white p-5 shadow-sm">
-                    <h1 class="mb-5 text-2xl font-bold text-black">Transactions List</h1>
+                <div class="mx-auto max-w-7xl rounded-md p-5 shadow-sm">
+                    <h1 class="mb-5 text-2xl font-bold">Transactions List</h1>
 
                     @if (session('success'))
                         <div class="relative mb-4 rounded border border-green-400 bg-green-100 px-4 py-3 text-green-700"
@@ -27,7 +26,13 @@
                     @endif
 
                     <div class="mb-4 flex justify-end">
-                        <a href="{{ route('transactions.create') }}" class="btn btn-primary">Create New Transactions</a>
+                        <a href="{{ route('transactions.create') }}" class="btn btn-primary">
+                            <svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M5 12h14m-7 7V5" />
+                            </svg>
+                            Create New Transactions</a>
                     </div>
 
                     <div class="overflow-x-auto">
@@ -54,10 +59,12 @@
                                             <td>{{ $transaction->transaction->transaction_code }}</td>
                                             <td>{{ $transaction->unit->name }}</td>
                                             <td>{{ $transaction->transaction->user->name }}</td>
-                                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($transaction->date_borrowed)->locale('id_ID')->translatedFormat('l, d F Y') }}</td>
+                                            <td class="px-4 py-2">
+                                                {{ \Carbon\Carbon::parse($transaction->date_borrowed)->locale('id_ID')->translatedFormat('l, d F Y') }}
+                                            </td>
                                             <td>
                                                 @if ($transaction->remaining_days < 0)
-                                                    <span class="text-red-500">Over {{ abs($transaction->remaining_days) }}
+                                                    <span class="text-error">Over {{ abs($transaction->remaining_days) }}
                                                         days</span>
                                                 @else
                                                     {{ $transaction->remaining_days }} days
@@ -65,16 +72,32 @@
                                             </td>
                                             <td>
                                                 @if ($transaction->remaining_days < 0)
-                                                    <span class="text-red-500">{{ abs($transaction->fine) }}</span>
+                                                    <span class="text-error">{{ abs($transaction->fine) }}</span>
                                                 @else
                                                     -
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('transactions.view', ['transaction_code' => $transaction->transaction_code, 'unit_id' => $transaction->unit_id]) }}"
-                                                    class="btn btn-sm btn-info">View</a>
                                                 <a href="{{ route('transactions.return', ['transaction_code' => $transaction->transaction_code, 'unit_id' => $transaction->unit_id]) }}"
-                                                    class="btn btn-sm btn-primary">Return</a>
+                                                    class="btn btn-sm btn-primary">
+                                                    <svg class="h-6 w-6" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="0.7"
+                                                            d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4" />
+                                                    </svg>Return
+                                                </a>
+                                                <a href="{{ route('transactions.view', ['transaction_code' => $transaction->transaction_code, 'unit_id' => $transaction->unit_id]) }}"
+                                                    class="btn btn-sm btn-secondary">
+                                                    <svg class="h-6 w-6" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

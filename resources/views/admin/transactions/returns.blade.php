@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.no-navbar')
 
 @section('content')
     <div class="container mx-auto mt-8">
@@ -49,7 +49,7 @@
                             </label>
                             <input type="text" name="fine"
                                 value="Rp. {{ number_format($transactionUnit->fine, 0, ',', '.') }}"
-                                class="input input-bordered text-start text-red-500" readonly>
+                                class="input input-bordered text-start text-error" readonly>
                         </div>
                     @endif
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.no-navbar')
 
 @section('content')
     <div class="container mx-auto mt-8">
@@ -7,11 +7,11 @@
                 <h2 class="card-title">Create Transaction Unit</h2>
 
                 @if ($errors->has('error'))
-                    <div class="relative mb-4 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700" role="alert">
+                    <div class="relative mb-4 rounded border border-red-400 bg-red-100 px-4 py-3 text-error" role="alert">
                         <strong class="font-bold">Error!</strong>
                         <span class="block sm:inline">{{ $errors->first('error') }}</span>
                         <span class="absolute bottom-0 right-0 top-0 px-4 py-3">
-                            <svg class="h-6 w-6 fill-current text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="h-6 w-6 fill-current text-error" role="button" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20">
                                 <title>Close</title>
                                 <path
@@ -40,7 +40,7 @@
                         <input type="date" name="date_borrowed" class="input input-bordered w-full"
                             value="{{ now()->toDateString() }}" readonly>
                         @error('date_borrowed')
-                            <span class="text-sm text-red-500">{{ $message }}</span>
+                            <span class="text-sm text-error">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -56,7 +56,7 @@
                             @endforeach
                         </select>
                         @error('user_id')
-                            <span class="text-sm text-red-500">{{ $message }}</span>
+                            <span class="text-sm text-error">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -76,7 +76,7 @@
                                     @endforeach
                                 </select>
                                 @error('unit_id.*')
-                                    <span class="text-sm text-red-500">{{ $message }}</span>
+                                    <span class="text-sm text-error">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -86,13 +86,13 @@
                                 </label>
                                 <input type="date" name="date_returned[]" class="input input-bordered w-full">
                                 @error('date_returned.*')
-                                    <span class="text-sm text-red-500">{{ $message }}</span>
+                                    <span class="text-sm text-error">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <button type="button"
                                 class="btn btn-danger remove-unit ms-auto mt-4 block border-0 bg-transparent">
-                                <svg class="h-6 w-6 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                <svg class="h-6 w-6 text-error" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
@@ -139,7 +139,7 @@
                 <input type="date" name="date_returned[]" class="input input-bordered w-full">
             </div>
             <button type="button" class="btn btn-danger bg-transparent border-0 remove-unit ms-auto mt-4 block">
-                <svg class="w-6 h-6 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-error" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
                 </svg>
             </button>
