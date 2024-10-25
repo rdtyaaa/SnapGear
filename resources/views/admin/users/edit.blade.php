@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto mt-10">
-    <div class="max-w-md mx-auto bg-white p-5 rounded-md shadow-sm">
+    <div class="max-w-md mx-auto bg-base-100 p-5 rounded-md shadow-sm">
         <h1 class="text-2xl font-bold mb-5">Edit User</h1>
 
         @if (session('success'))
@@ -20,29 +20,29 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" value="{{ $user->name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="name" class="block text-sm font-medium">Name</label>
+                <input type="text" name="name" id="name" value="{{ $user->name }}" class="mt-1 block bg-base-100 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('name')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" name="email" id="email" value="{{ $user->email }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="email" class="block text-sm font-medium">Email</label>
+                <input type="email" name="email" id="email" value="{{ $user->email }}" class="mt-1 bg-base-100 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('email')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" name="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="password" class="block text-sm font-medium">Password</label>
+                <input type="password" name="password" id="password" class="mt-1 block w-full px-3 bg-base-100 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 @error('password')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="password_confirmation" class="block text-sm font-medium">Confirm Password</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="mt-1 block w-full bg-base-100 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="flex">
                 <button type="submit" class="btn btn-primary w-full">Update</button>

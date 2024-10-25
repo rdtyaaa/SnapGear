@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto mt-10 p-8 bg-base-200">
+    <div class="container mx-auto mt-10 p-8 bg-base-200 -my-10">
         <!-- Search Form -->
         <div class="flex w-full">
             <form action="{{ route('dashboard') }}" method="GET" class="mb-6 w-full justify-center">
                 <div class="flex max-w-2xl items-center">
                     <input id="search-input" type="text" name="search" placeholder="Search units..."
                         class="input input-bordered w-full">
-                    <button type="submit" class="btn bg-accent ml-2"><svg class="h-6 w-6" aria-hidden="true"
+                    <button type="submit" class="btn bg-accent ml-2 text-black"><svg class="h-6 w-6" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
@@ -18,7 +18,7 @@
                 </div>
             </form>
             <a href="{{ route('user.history') }}" class="flex">
-                <button type="button" class="btn bg-secondary ms-auto"><svg class="h-6 w-6" aria-hidden="true"
+                <button type="button" class="btn bg-secondary ms-auto text-black"><svg class="h-6 w-6" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path fill-rule="evenodd"

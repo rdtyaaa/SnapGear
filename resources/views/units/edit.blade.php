@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto mt-10">
-    <div class="max-w-md mx-auto bg-white p-5 rounded-md shadow-sm">
+    <div class="max-w-md mx-auto bg-base-100 p-5 rounded-md shadow-sm">
         <h1 class="text-2xl font-bold mb-5">Edit Unit</h1>
 
         @if (session('success'))
@@ -20,17 +20,17 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" value="{{ $unit->name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="name" class="block text-sm font-medium">Name</label>
+                <input type="text" name="name" id="name" value="{{ $unit->name }}" class="mt-1 bg-base-100 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('name')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Category</label>
+                <label class="block text-sm font-medium">Category</label>
                 <div id="category-buttons" class="flex flex-wrap">
                     @foreach ($categories as $category)
-                        <button type="button" class="category-button mt-1 mr-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ in_array($category->id, $unit->categories->pluck('id')->toArray()) ? 'bg-indigo-500 text-white' : '' }}" data-id="{{ $category->id }}">{{ $category->name }}</button>
+                        <button type="button" class="category-button mt-1 mr-2 px-3 py-2 border bg-base-100 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ in_array($category->id, $unit->categories->pluck('id')->toArray()) ? 'bg-secondary text-white' : '' }}" data-id="{{ $category->id }}">{{ $category->name }}</button>
                     @endforeach
                 </div>
                 @error('category_id')
@@ -43,22 +43,22 @@
                 @endforeach
             </div>
             <div class="mb-4">
-                <label for="gambar" class="block text-sm font-medium text-gray-700">Image</label>
-                <input type="file" name="gambar" id="gambar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="gambar" class="block text-sm font-medium">Image</label>
+                <input type="file" name="gambar" id="gambar" class="mt-1 block w-full px-3 py-2 bg-base-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 @error('gambar')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="harga" class="block text-sm font-medium text-gray-700">Price</label>
-                <input type="number" name="harga" id="harga" value="{{ $unit->harga }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="harga" class="block text-sm font-medium">Price</label>
+                <input type="number" name="harga" id="harga" value="{{ $unit->harga }}" class="mt-1 bg-base-100 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('harga')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="stok" class="block text-sm font-medium text-gray-700">Stock</label>
-                <input type="number" name="stok" id="stok" value="{{ $unit->stok }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="stok" class="block text-sm font-medium">Stock</label>
+                <input type="number" name="stok" id="stok" value="{{ $unit->stok }}" class="mt-1 bg-base-100 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('stok')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
@@ -103,8 +103,8 @@
         categoryButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const categoryId = this.getAttribute('data-id');
-                if (this.classList.contains('bg-indigo-500')) {
-                    this.classList.remove('bg-indigo-500', 'text-white');
+                if (this.classList.contains('bg-secondary')) {
+                    this.classList.remove('bg-secondary', 'text-white');
                     const input = document.getElementById(`category-${categoryId}`);
                     if (input) {
                         selectedCategories.removeChild(input);
@@ -112,7 +112,7 @@
                     }
                 } else {
                     if (selectedCount < 2) {
-                        this.classList.add('bg-indigo-500', 'text-white');
+                        this.classList.add('bg-secondary', 'text-white');
                         const input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = 'category_id[]';

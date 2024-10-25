@@ -14,13 +14,13 @@
                 <label class="me-4 grid cursor-pointer place-items-center">
                     <input type="checkbox" value="dark"
                         class="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1" />
-                    <svg class="stroke-base-100 fill-base-100 col-start-1 row-start-1"
+                    <svg class="stroke-base-100 fill-base-100 col-start-2 row-start-1"
                         xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg class="stroke-base-100 fill-base-100 col-start-2 row-start-1"
+                    <svg class="stroke-base-100 fill-base-100 col-start-1 row-start-1"
                         xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">

@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto mt-10">
-    <div class="max-w-md mx-auto bg-white p-5 rounded-md shadow-sm">
+    <div class="max-w-md mx-auto bg-base-100 p-5 rounded-md shadow-sm">
         <h1 class="text-2xl font-bold mb-5">Create Category</h1>
 
         @if (session('success'))
@@ -33,14 +33,14 @@
         <form action="{{ route('categories.store') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <label for="name" class="block text-sm font-medium">Name</label>
+                <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 bg-base-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                 @error('name')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="flex">
-                <button type="submit" class="bg-primary w-full px-4 py-2 rounded-md">Create</button>
+                <button type="submit" class="bg-primary text-base-100 w-full px-4 py-2 rounded-md">Create</button>
             </div>
         </form>
     </div>

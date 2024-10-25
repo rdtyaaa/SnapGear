@@ -74,7 +74,7 @@
                                                 No Image
                                             @endif
                                         </td>
-                                        <td>{{ $unit->harga }}</td>
+                                        <td>Rp. {{ number_format($unit->harga, 0, ',', '.') }}</td>
                                         <td>{{ $unit->stok }}</td>
                                         <td>
                                             <a href="{{ route('units.edit', $unit->id) }}"
