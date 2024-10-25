@@ -1,84 +1,66 @@
-<!DOCTYPE html>
-<html lang="en" data-theme='light'>
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <title>Homepage</title>
-</head>
-
-<body>
-    <!-- navbar -->
-    <div class="navbar bg-orange-600">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl text-white">SnapGear</a>
-        </div>
-        <div class="flex-none gap-2">
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img alt="Profile Avatar"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </div>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><a class="justify-between" href="{{ route('profile.edit') }}">Profile</a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="w-full justify-between text-left">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- navbar end -->
-
-    <div class="container mx-auto mt-10 p-8">
+@section('content')
+    <div class="container mx-auto mt-10 p-8 bg-base-200">
         <!-- Search Form -->
         <div class="flex w-full">
             <form action="{{ route('dashboard') }}" method="GET" class="mb-6 w-full justify-center">
                 <div class="flex max-w-2xl items-center">
                     <input id="search-input" type="text" name="search" placeholder="Search units..."
                         class="input input-bordered w-full">
-                    <button type="submit" class="btn ml-2 bg-orange-600 text-white">Search</button>
+                    <button type="submit" class="btn bg-accent ml-2"><svg class="h-6 w-6" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
+                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        </svg>
+                        Search</button>
                 </div>
             </form>
-            <a href="{{ route('user.history') }}">
-                <button type="button" class="btn bg-primary ms-auto text-white">History</button>
+            <a href="{{ route('user.history') }}" class="flex">
+                <button type="button" class="btn bg-secondary ms-auto"><svg class="h-6 w-6" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-3 8a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Zm2 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    History</button>
             </a>
         </div>
 
         <!-- Results Section -->
-        <div id="units-list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            @foreach ($units as $unit)
-                <div class="card bg-base-100 w-80 shadow-xl">
-                    <figure>
-                        <img src="{{ asset('images/' . $unit->gambar) }}" alt="{{ $unit->name }}" />
-                    </figure>
-                    <div class="card-body">
-                        <h1 class="card-title text-3xl">{{ $unit->name }}</h1>
+        <h1 class="mb-8 mt-16 block text-2xl font-bold justify-center flex">Available Products</h1>
+        <div class="center flex w-full">
+            <div id="units-list" class="mx-auto grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                @foreach ($units as $unit)
+                    <div class="card bg-base-100 w-96 shadow-lg">
+                        <figure class="h-64 object-cover">
+                            <img src="{{ asset('images/' . $unit->gambar) }}" alt="{{ $unit->name }}" />
+                        </figure>
+                        <div class="card-body">
 
-                        <div class="badge">Category:
-                            @if ($unit->categories->isEmpty())
-                                No Category
-                            @else
+                            <h1 class="card-title my-auto text-xl">{{ $unit->name }}</h1>
+                            <h3 class="text-sm">Stock: {{ $unit->stok }}</h3>
+                            <div class="flex">
+                                @if ($unit->categories->isEmpty())
+                                    <div class="badge badge-accent my-auto me-2 h-fit">
+                                            No Category
+                                        </div>
+                                @else
                                 @foreach ($unit->categories as $category)
-                                    {{ $category->name }}@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach
-                            @endif
+                                        <div class="badge badge-accent my-auto me-2 h-fit">
+                                            {{ $category->name }}
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <h3 class="text-primary flex justify-end text-lg font-semibold">Rp.
+                                {{ number_format($unit->harga, 0, ',', '.') }}</h3>
                         </div>
-                        <h3 class="">Harga: {{ number_format($unit->harga, 0, ',', '.') }}</h3>
-                        <h3 class="">Stok: {{ $unit->stok }}</h3>
-
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -106,26 +88,30 @@
                         // Iterate over the fetched data and display units dynamically
                         data.units.forEach(unit => {
                             const unitCard = `
-                            <div class="card bg-base-100 w-96 shadow-xl">
-                                <figure>
-                                    <img src="/images/${unit.gambar}" alt="${unit.name}" />
-                                </figure>
-                                <div class="card-body">
-                                    <h2 class="card-title">${unit.name}</h2>
+                                <div class="card bg-base-100 w-80 shadow-xl">
+                                    <figure>
+                                        <img src="/images/${unit.gambar}" alt="${unit.name}" />
+                                    </figure>
+                                    <div class="card-body">
+                                        <h1 class="card-title text-3xl">${unit.name}</h1>
 
-                                    <div class="badge">Category: ${
-                                        unit.categories.length > 0
-                                            ? unit.categories.map(cat => cat.name).join(', ')
-                                            : 'No Category'
-                                    }</div>
+                                        <div class="badge badge-accent">Category: ${
+                                            unit.categories.length > 0
+                                                ? unit.categories.map(cat => cat.name).join(', ')
+                                                : 'No Category'
+                                        }</div>
 
+                                        <h3 class="">Price: ${new Intl.NumberFormat('id-ID', {
+                                            style: 'currency',
+                                            currency: 'IDR'
+                                        }).format(unit.harga)}</h3>
 
-
-                                </div>
-
-                            </div>`;
+                                        <h3 class="">Stock: ${unit.stok}</h3>
+                                    </div>
+                                </div>`;
                             unitsList.insertAdjacentHTML('beforeend', unitCard);
                         });
+
                     })
                     .catch(error => {
                         console.error('Error fetching units:', error);
@@ -133,6 +119,4 @@
             });
         });
     </script>
-</body>
-
-</html>
+@endsection

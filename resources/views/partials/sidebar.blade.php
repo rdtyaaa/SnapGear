@@ -4,7 +4,7 @@
     <ul class="menu bg-base-200 text-base-content h-full w-80 p-4 pt-24">
         <!-- Sidebar content here -->
         <li
-            class="{{ request()->routeIs('transactions.index') ? 'bg-primary font-bold' : 'hover:bg-secondary hover:text-white' }} flex rounded-lg">
+            class="{{ request()->routeIs('transactions.index') ? 'bg-primary text-base-100 font-bold' : 'hover:bg-secondary hover:text-base-100 ' }} flex rounded-lg">
             <div>
                 @if (request()->routeIs('transactions.index'))
                     <svg class="flex h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -29,7 +29,7 @@
             </div>
         </li>
         <li
-            class="{{ request()->routeIs('units.index') ? 'bg-primary font-bold' : 'hover:bg-secondary hover:text-white' }} rounded-lg">
+            class="{{ request()->routeIs('units.index') ? 'bg-primary text-base-100 font-bold' : 'hover:bg-secondary hover:text-base-100 ' }} rounded-lg">
             <div>
                 @if (request()->routeIs('units.index'))
                     <svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -52,7 +52,7 @@
             </div>
         </li>
         <li
-            class="{{ request()->routeIs('categories.index') ? 'bg-primary font-bold' : 'hover:bg-secondary hover:text-white' }} rounded-lg">
+            class="{{ request()->routeIs('categories.index') ? 'bg-primary text-base-100 font-bold' : 'hover:bg-secondary hover:text-base-100 ' }} rounded-lg">
             <div>
                 @if (request()->routeIs('categories.index'))
                     <svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -72,7 +72,7 @@
             </div>
         </li>
         <li
-            class="{{ request()->routeIs('admin.users.index') ? 'bg-primary font-bold' : 'hover:bg-secondary hover:text-white' }} rounded-lg">
+            class="{{ request()->routeIs('admin.users.index') ? 'bg-primary text-base-100 font-bold' : 'hover:bg-secondary hover:text-base-100 ' }} rounded-lg">
             <div>
                 @if (request()->routeIs('admin.users.index'))
                     <svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -91,7 +91,7 @@
                 <a href="{{ route('admin.users.index') }}">User</a>
             </div>
         </li>
-        <li class="hover:bg-secondary rounded-lg hover:text-white">
+        <li class="hover:bg-secondary hover:text-base-100 rounded-lg">
             <div>
                 <svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" fill="none" viewBox="0 0 24 24">

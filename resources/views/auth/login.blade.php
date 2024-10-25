@@ -48,7 +48,7 @@
     <div class="mt-4 text-center">
         <p class="text-sm text-gray-600">
             {{ __("Don't have an account?") }}
-            <a class="text-indigo-600 hover:text-indigo-900" href="{{ route('register') }}">
+            <a class="text-secondary hover:text-indigo-900" href="{{ route('register') }}">
                 {{ __('Register') }}
             </a>
         </p>

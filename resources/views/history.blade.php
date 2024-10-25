@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" data-theme='light'>
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <title>Homepage</title>
-</head>
+@section('content')
 
-<body>
-    <!-- navbar -->
-    <div class="navbar bg-orange-600">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl text-white">SnapGear</a>
-        </div>
-        <div class="flex-none gap-2">
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img alt="Profile Avatar"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </div>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><a class="justify-between" href="{{ route('profile.edit') }}">Profile</a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="w-full justify-between text-left">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+    <div class="container mx-auto px-24">
+        <div class="container mx-auto mt-24">
+            <div class="form-control no-print mb-4">
+                <a href="{{ url('/dashboard') }}"
+                    class="btn inline-flex justify-start border-0 bg-transparent hover:bg-transparent">
+                    <svg class="mr-2 h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M5 12h14M5 12l4-4m-4 4 4 4" />
+                    </svg>
+                    Back
+                </a>
             </div>
-        </div>
-    </div>
-    <!-- navbar end -->
-
-    <div class="container mx-auto ps-8">
-        <div class="container mx-auto mt-8">
             <h2 class="mb-8 text-xl font-bold">Riwayat Peminjaman</h2>
             <table class="table-zebra table w-full">
-                <thead class="text-base text-gray-800">
+                <thead>
                     <tr>
                         <th class="px-4 py-2">Transaction Code</th>
                         <th class="px-4 py-2">Product</th>
                         <th class="px-4 py-2">Return Agreement</th>
+                        <th class="px-4 py-2">Status</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -62,9 +39,16 @@
                                 <td class="px-4 py-2">
                                     {{ \Carbon\Carbon::parse($unit->return_agreement)->locale('id_ID')->translatedFormat('l, d F Y') }}
                                 </td>
+                                <td class="px-4 py-2">{{ $unit->status }}</td>
                                 <td class="px-4 py-2">
                                     <a href="{{ route('transactions.view', ['transaction_code' => $unit->transaction_code, 'unit_id' => $unit->unit_id]) }}"
-                                        class="btn btn-link">View</a>
+                                        class="btn btn-primary"><svg class="h-6 w-6" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                                clip-rule="evenodd" />
+                                        </svg>View</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -73,8 +57,4 @@
             </table>
         </div>
     </div>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-</body>
-
-</html>
+@endsection
