@@ -39,6 +39,6 @@ Berikut adalah schema database yang digunakan dalam proyek ini:
 ## Demo
 Lihat penjelasan lengkap proyek dalam video demo berikut:
 
-[Screen Recorder Demo - Penjelasan Website](link-video-demo)
+[Screen Recorder Demo - Penjelasan Website](https://youtu.be/RqwsimjKFaM)
 
 
