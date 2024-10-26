@@ -34,7 +34,7 @@ Tujuan dari proyek SnapGear adalah untuk:
 ## Database Schema
 Berikut adalah schema database yang digunakan dalam proyek ini:
 
-![Database Schema](./public/images/Schema Database.png)
+![Database Schema](https://drive.google.com/uc?export=view&id=10UPNFa9TkvlJiGvoQNo5ftG5p_Ah7chA)
 
 ## Demo
 Lihat penjelasan lengkap proyek dalam video demo berikut:
